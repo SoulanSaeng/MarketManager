@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace MarketManager.Schemas
-{
-    
+{ 
     public class LookupResultList
     {
         public  List<LookupResult> Lookup { get; set; }  
-
-
     }
 }

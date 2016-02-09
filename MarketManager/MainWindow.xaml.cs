@@ -23,7 +23,7 @@ namespace MarketManager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
 
         MainViewModel _mainView;   
@@ -34,10 +34,12 @@ namespace MarketManager
            
         }
 
-        private void Mouse_enter(object sender, TextChangedEventArgs e)
+        private void Open_quote(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine(sender.ToString());
-            Console.WriteLine(e.RoutedEvent);
+            var gridItem = (DataGrid)sender;
+            var quoteName = (LookupResult)gridItem.SelectedItem;
+            Quotes q = new Quotes(quoteName);
+            q.Show();
         }
     }
 }

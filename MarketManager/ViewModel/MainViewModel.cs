@@ -70,8 +70,8 @@ namespace MarketManager.ViewModel
             set
             {
                 this._searchTerm = value;
-                QueryQuotes(value); //Set the query
-                Console.WriteLine("Query has been set to :" + this.QueryResult);
+                if(value.Length>=4)
+                    QueryQuotes(value); //Set the query
                 OnPropertyChanged("SearchTerm");
             }
         }

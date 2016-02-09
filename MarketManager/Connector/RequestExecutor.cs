@@ -10,27 +10,19 @@ namespace MarketManager.Connector
 {
     public static class  RequestExecutor
     {
-        public const string BaseUrl = "dev.markitondemand.com";
-        public const string LookUp = "Api/v2/Lookup";
-
         /// <summary>
         /// Executes Request based on generic parameter types
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="Request"></param>
         /// <returns></returns>
-        public static T Execute <T>(RestRequest Request) where T : new()
+        public static T Execute <T>(RestRequest Request, string baseUrl, string endPoint) where T : new()
         {
-            UriBuilder uriBuilder = new UriBuilder();
-            uriBuilder.Host = BaseUrl;
-            uriBuilder.Path = LookUp;
-            Uri RequestUri = uriBuilder.Uri;
-
             RestClient client = new RestClient();
-            client.BaseUrl = RequestUri;
-
+            UriBuilder requestUri = MarkitUriBuilder.Build(baseUrl, endPoint);
+            client.BaseUrl = requestUri.Uri;
+            
             var response = client.Execute<T>(Request);
-
             if (response.ErrorException!=null)
             {
                 Console.WriteLine("Something went wrong! The following {0} occured", response.ErrorMessage);
@@ -40,14 +32,11 @@ namespace MarketManager.Connector
             return response.Data;
         }
 
-        public static void ExecuteAsync<T>(RestRequest Request, Action<T>CallBack) where T : new()
+        public static void ExecuteAsync<T>(RestRequest Request, Action<T>CallBack, string baseUrl, string endPoint) where T : new()
         {
-            UriBuilder uriBuilder = new UriBuilder();
-            uriBuilder.Host = BaseUrl;
-            uriBuilder.Path = LookUp;
-            Uri RequestUri = uriBuilder.Uri;
             RestClient client = new RestClient();
-            client.BaseUrl = RequestUri;
+            UriBuilder requestUri = MarkitUriBuilder.Build(baseUrl, endPoint);
+            client.BaseUrl = requestUri.Uri;
             client.ExecuteAsync<T>(Request, (response) =>
             {
                 if (response.ErrorException != null)
@@ -58,7 +47,5 @@ namespace MarketManager.Connector
                 CallBack(response.Data);
             });
         }
-
-
     }
 }

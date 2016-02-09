@@ -1,10 +1,11 @@
-﻿<Window x:Class="MarketManager.MainWindow"
+﻿<Controls:MetroWindow x:Class="MarketManager.MainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:local="clr-namespace:MarketManager.ViewModel"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="MainWindow"
-                      Height="600"
-                      Width="600"
+                      Height="800"
+                      Width="1100"
                       Background="WhiteSmoke"
                       BorderThickness="0" 
                       ResizeMode="CanResizeWithGrip"
@@ -15,12 +16,13 @@
     </Window.DataContext>
 
     <Grid>
-        <TextBox  Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,26,275,518.5" SpellCheck.IsEnabled="True"/>
-        <DataGrid Margin="10,78,51,108.5" AutoGenerateColumns="True"  BorderThickness="1" ItemsSource="{Binding QueryResult.Lookup, Mode=OneWay}">
+        <TextBox Controls:TextBoxHelper.ClearTextButton="True" Height="30" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="785,17,7,719.5" SpellCheck.IsEnabled="True" RenderTransformOrigin="0.5,0.5" Controls:ButtonHelper.CornerRadius="5" >
+        </TextBox>
+        <DataGrid Margin="158,64,10,10.5" AutoGenerateColumns="True"  BorderThickness="1" ItemsSource="{Binding QueryResult.Lookup, Mode=OneWay}" Height="700" IsReadOnly="True" MouseDoubleClick="Open_quote" >
         </DataGrid>
     </Grid>
 
 
-</Window>
+</Controls:MetroWindow>
     
     
