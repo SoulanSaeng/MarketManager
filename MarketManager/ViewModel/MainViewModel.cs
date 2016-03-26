@@ -71,7 +71,9 @@ namespace MarketManager.ViewModel
             {
                 this._searchTerm = value;
                 if(value.Length>=4)
+
                     QueryQuotes(value); //Set the query
+       
                 OnPropertyChanged("SearchTerm");
             }
         }
